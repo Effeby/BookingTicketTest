@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href=" {% static 'img\logo rentetalent.png' %} " rel="shortcut icon" type="image/x-icon"/>
+
+<!-- Title -->
+<title>Retent Talent</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-RbYHu0wAUN3XtUGaNxWYCvgxKBy2XhGSkNWQryG4nN5y5Sm2/fHmO6eOR3v88c8NKb4v0otgu3JZGuVSdCQSSA==" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        
+        section {
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 {
+            margin-top: 0;
+            margin-bottom: 0;
+            color: #333;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+        
+        section:hover {
+            background-color: #e9ecef;
+        }
+
+        section a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        section a:hover {
+            color: #007bff;
+        }
+
+        footer {
+            background-color: #343a40;
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-link {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 10px;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            background-color: #23272b;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Paramètres</h1>
+        </header>
+
+        <section id="picture-profil">
+            <a href="{% url 'change_profile_picture' %}">
+                <i class="fas fa-user-edit icon"></i>
+                <h2>Modifier la Photo de Profil</h2>
+            </a>
+        </section>
+        
+        <section id="edit-profil">
+            <a href="{% url 'Edit_Profil' %}">
+                <i class="fas fa-user-edit icon"></i>
+                <h2>Modifier le Profil</h2>
+            </a>
+        </section>
+
+        <section id="edit-profil">
+            <a href="{% url 'resetlink' %}">
+                <i class="fas fa-user-edit icon"></i>
+                <h2>Modifier mon mot de passe</h2>
+            </a>
+        </section>
+        
+               
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="#" onclick="confirmLogout()" class="footer-link">Déconnexion</a>
+                <a href="{% url 'index' %}" class="footer-link">Retour à la page l'acceuil</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function confirmLogout() {
+            if (confirm("Êtes-vous sûr de vouloir vous déconnecter?")) {
+                window.location.href = "{% url 'logout' %}";
+            }
+        }
+    </script>
+</body>
+</html>

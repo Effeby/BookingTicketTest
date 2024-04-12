@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.konnectplugins.com/recruit/contact-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 21:38:54 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/odometer.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
+
+  <title>Boleto  - Online Ticket Booking Website HTML Template</title>
+
+
+</head>
+
+<!-- Body -->
+<body>
+
+<!-- Pre Loader -->
+<div class="loading">
+  <div class="loader"></div>
+</div>
+<br><br><br>
+<section>
+  <div class="container">
+    <div class="row justify-content-center"> <!-- Utilisez justify-content-center pour centrer horizontalement -->
+      <div style="margin-left: 25%; margin-right: 25%;"> <!-- Utilisez col-md-6 pour définir la largeur de la carte -->
+        <div class="card"> <!-- Utilisez la classe card de Bootstrap pour créer une carte -->
+          <div class="card-body">
+            <h3 class="section-heading text-dark text-center">Nous vous enverrons un lien pour réinitialiser votre mot de passe</h3>
+            <br>
+            <!-- Ajoutez ceci à l'endroit où vous voulez afficher les messages d'erreur -->
+            
+            <form class="konnect-form" id="resetForm" method="post" action="{% url 'resetlink' %}">
+                {% csrf_token %}
+
+                {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            <br>
+
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Votre adresse e-mail" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Recevoir le lien</button>
+                
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- jQuery --> 
+
+<script src="{% static 'assets/jquery/jquery.min.js' %}"></script> 
+
+<!-- Bootstrap Core JavaScript --> 
+<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script> 
+
+<!-- Theme JavaScript --> 
+<script src="{% static 'js/default.js' %}"></script>  
+<script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 12.9346661, lng: 77.6229708},
+		  scrollwheel: false,
+		  getMap: true
+		   });
+        var infowindow = new google.maps.InfoWindow({
+        content: document.getElementById("cont").innerHTML
+        });
+        var marker = new google.maps.Marker({
+          position: map.getCenter(),
+          icon: "img/map-icon.png",
+          map: map		  
+        });
+  infowindow.open(map,marker);
+       }
+    </script> 
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5u8QmAP6DxLCQrbI5QnH9Y4n6xLBV2V0&amp;callback=initMap">
+    </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77800499-1', 'auto');
+  ga('send', 'pageview');
+
+</script></body>
+
+</html>

@@ -1,0 +1,210 @@
+{% extends 'base2.html' %}
+
+{% load static %}
+
+{% block title %}
+   
+{% endblock title %}
+
+{% block content %}
+
+ <!-- Style pour la section Recent Post -->
+ <style>
+	.recent-post-list {
+		list-style: none;
+		padding: 0;
+	}
+
+	.recent-post-item {
+		margin-bottom: 20px;
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 20px;
+	}
+
+	.recent-post-link {
+		display: flex;
+		align-items: flex-start;
+		color: #333;
+		text-decoration: none;
+	}
+
+	.recent-post-link:hover {
+		color: #007bff;
+	}
+
+	.post-info {
+		flex-grow: 1;
+	}
+
+	.post-title {
+		font-weight: bold;
+		margin-bottom: 5px;
+		color: #333;
+	}
+
+	.post-description {
+		margin-bottom: 5px;
+		color: #666;
+	}
+
+	.post-contract {
+		margin-bottom: 5px;
+		color: #888;
+	}
+
+	.post-details {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: #888;
+	}
+
+	.post-date {
+		font-size: 12px;
+		color: #888;
+	}
+
+	.secteur-color {
+		color: #E57373; /* Rouge */
+	}
+
+	.contract-color {
+		color: #81C784; /* Vert */
+	}
+
+	.description-color {
+		color: #64B5F6; /* Bleu */
+	}
+</style>
+
+    <!-- Page Wrap -->
+    <div class="pageWrap">
+
+        <!-- Page content -->
+        <div class="pageContent extended">
+            <div class="container">
+                <div class="boxHeader pageBoxHeader clearfix">
+                    <div class="pull-left">
+                        <h1 class="pageTitle">
+                            <a href="#" title="Dashboard">Dashboard</a>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Admin</a></li>
+                            <li class="active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <!-- Statsbar -->
+                <div class="statsBar">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4 i yellow">
+                            <a href="{% url 'tables' %}" title="Nombre de postulants" class="c">
+                                <h3 class="title">Nombre de postulants</h3>
+                                <div class="num">{{ total_candidatures }}</div>
+                                <i class="icon zmdi zmdi-globe"></i>
+                            </a>
+                        </div>                        
+                        <div class="col-xs-12 col-md-4 i pink">
+                            <a href="#" title="#" class="c">
+                                <h3 class="title">Files downloaded</h3>
+                                <div class="num">5,478,123</div>
+                                <i class="icon zmdi zmdi-square-down"></i>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-md-4 i green">
+                            <a href="{% url 'mes_posts' %}" title="Total des post" class="c">
+                                <h3 class="title">Total des post</h3>
+                                <div class="num">{{ total_emplois }}</div> <!-- Utilisation de la variable total_emplois -->
+                                <i class="icon zmdi zmdi-card"></i>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="box box-without-padding">
+                            <!-- Tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation"><a href="#tab-item-2" aria-controls="tab-item-2" role="tab" data-toggle="tab">Info</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <!-- Used devices -->
+                                <div role="tabpanel" class="tab-pane fade" id="tab-item-2">
+                                    <div class="side-padding-25">
+                                        <p class="animated fadeInLeft">Bienvenue, {{ user.username }}! Nous sommes ravis de vous accueillir sur votre Dashboard.</p>
+                                        <p class="animated fadeInUp">Ici, vous avez le contrôle total sur vos annonces. Vous pouvez créer de nouvelles annonces, les modifier ou les supprimer à tout moment.</p>
+                                        <p class="animated fadeInRight">De plus, vous pouvez suivre le nombre de postulants pour chacune de vos annonces et voir le nombre total d'annonces que vous avez postées.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-xs-6 ct-pie-chart">
+                                    
+                                        <div class="decorative-animation">
+                                            <!-- Insérez ici votre animation décorative -->
+                                            <img src="{% static 'gif2/2.gif' %}" alt="Décorative Animation" style="width: 100%; height: auto;">
+                                        </div>
+                                    
+                                </div>
+                                <div class="col-xs-6 ct-pie-chart">
+                                    
+                                        <div class="decorative-animation">
+                                            <!-- Insérez ici votre animation décorative -->
+                                            <img src="{% static 'gif2/3.gif' %}" alt="Décorative Animation" style="width: 100%; height: auto;">
+                                        </div>
+                                    
+                                </div>
+                            </div>
+
+                            <br>
+                            
+
+                            <div class="col-xs-12">
+                                <div class="box box-without-padding">
+                                    <div class="clearfix boxHeader">
+                                        <h2 class="boxTitle pull-left">Recent Post</h2>
+                                    </div>
+                                    <div class="simpleList simpleListImages recent-post-list">
+                                        <ul>
+                                            {% for emploi in mes_emplois %}
+                                            <li class="recent-post-item">
+                                                <a href="{% url 'Job_Detail' emploi.pk %}" title="#" class="recent-post-link">
+                                                    <i class="zmdi zmdi-chevron-right arrow"></i>
+                                                    <div class="post-info">
+                                                        <div class="post-title secteur-color"><strong>Secteur:</strong> {{ emploi.secteur }}</div> <!-- Afficher le secteur de l'emploi -->
+                                                        <div class="post-description description-color"><strong>Description:</strong> {{ emploi.description }}</div> <!-- Afficher la description de l'emploi -->
+                                                        <div class="post-contract contract-color"><strong>Contrat:</strong> {{ emploi.contrat }}</div> <!-- Afficher le contrat de l'emploi -->
+                                                    </div>
+                                                    <div class="post-details">
+                                                        <div class="post-date">{{ emploi.date_add }}</div> <!-- Afficher la date d'ajout de l'emploi -->
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+{% endblock content %}

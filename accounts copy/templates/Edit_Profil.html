@@ -1,0 +1,234 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href=" {% static 'img\logo rentetalent.png' %} " rel="shortcut icon" type="image/x-icon"/>
+
+<!-- Title -->
+<title>Retent Talent</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .user-card-full {
+            overflow: hidden;
+            display: flex;
+        }
+
+        .user-profile {
+            border-radius: 5px 0 0 5px;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            padding: 20px 0;
+            width: 100%;
+        }
+
+        .user-profile img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 40px;
+            border: 5px solid #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .user-profile h6 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .user-profile .icon-edit {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .user-profile p {
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .user-info {
+            padding: 20px;
+            width: 100%;
+            overflow-y: auto; /* Ajout de la barre de défilement verticale */
+            max-height: calc(100vh - 250px); /* Limite la hauteur de la section pour la rendre entièrement visible */
+        }
+
+        .user-info h6 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            text-decoration: underline;
+        }
+
+        .user-info .form-group {
+            margin-bottom: 20px;
+        }
+
+        .user-info label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .user-info input[type="text"],
+        .user-info textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .separator {
+            height: 2px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+
+        .return-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .return-button a {
+            background-color: black;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .return-button a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Améliorations de style */
+        .user-info textarea {
+            height: 200px; /* Augmenter la hauteur de la zone de texte */
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .edit-icon {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row user-card-full">
+            <div class="col-sm-4 user-profile">
+                <div class="text-center">
+                    <img src="{{ user.profile.image.url }}" alt="Photo de profil">
+                </div>
+                <div class="text-center">
+                    <h6>{{ user.username }}</h6>
+                    <p>Modifier le profil</p>
+                    <i class="mdi mdi-square-edit-outline feather icon-edit m-t-10 edit-icon"></i>
+                </div>
+            </div>
+            <div class="col-sm-8 user-info">
+                <h6 class="m-b-20">Modifier les informations</h6>
+                <div class="separator"></div>
+                <form action="#" method="post">
+                    {% csrf_token %} <!-- Jeton CSRF ajouté ici -->
+    
+                    <div class="form-group">
+                        <label for="last-name">Nom :</label>
+                        <input type="text" id="last-name" name="last_name" value="{{ user.last_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="first-name"><i class="fas fa-user"></i> Prénom :</label>
+                        <input type="text" id="first-name" name="first_name" value="{{ user.first_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="username"><i class="fas fa-user"></i> Nom d'utilisateur :</label>
+                        <input type="text" id="username" name="username" value="{{ user.username }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email :</label>
+                        <input type="text" id="email" name="email" value="{{ user.email }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-number"><i class="fas fa-phone"></i> Numéro de téléphone :</label>
+                        <input type="text" id="phone-number" name="phone_number" value="{{ user.profile.phone_number }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="bio"><i class="fas fa-user"></i> Bio :</label>
+                        <textarea id="bio" name="bio">{{ user.profile.bio }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="facebook"><i class="fab fa-facebook"></i> Facebook :</label>
+                        <input type="text" id="facebook" name="facebook" value="{{ user.profile.facebook }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter"><i class="fab fa-twitter"></i> Twitter :</label>
+                        <input type="text" id="twitter" name="twitter" value="{{ user.profile.twitter }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="instagram"><i class="fab fa-instagram"></i> Instagram :</label>
+                        <input type="text" id="instagram" name="instagram" value="{{ user.profile.instagram }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin"><i class="fab fa-linkedin"></i> LinkedIn :</label>
+                        <input type="text" id="linkedin" name="linkedin" value="{{ user.profile.linkedin }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+        <div class="return-button">
+            <a href="{% url 'Parametre' %}">Retour</a>
+        </div>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

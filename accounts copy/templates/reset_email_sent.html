@@ -1,0 +1,35 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href=" {% static 'img\logo rentetalent.png' %} " rel="shortcut icon" type="image/x-icon"/>
+
+<!-- Title -->
+<title>Retent Talent</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #28a745;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉Email de réinitialisation envoyé !🎉</h1>
+    <p>Un e-mail de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.</p>
+    <a href="{% url 'login' %}" style="text-decoration: none; text-align: center;"><h4>Se connecter</h4></a>
+</body>
+</html>

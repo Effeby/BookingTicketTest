@@ -1,0 +1,68 @@
+{% extends 'base2.html' %}
+
+{% load static %}
+
+{% block title %}
+   
+{% endblock title %}
+
+{% block content %}
+
+	<!-- Page Wrap -->
+	<div class="pageWrap">
+
+		<!-- Page content -->
+		<div class="pageContent extended">
+			<div class="container">
+				<h1 class="pageTitle">
+					<a href="#" title="#">Tables</a>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="dashboard.html">Admin</a></li>
+					<li class="active">Tables</li>
+				</ol>
+
+				<!-- Data Table -->
+				<div class="box box-without-bottom-padding">
+					<h2 class="boxHeadline">Data Table</h2>
+					<h3 class="boxHeadlineSub">Subtitle of the table goes here</h3>
+					
+					<div class="tableWrap dataTable table-responsive js-select">
+						<table class="table table-striped table-hover js-datatable">
+							<thead>
+								<tr>
+									<th>Nom</th>
+									<th>Prénom</th>
+									<th>Date</th>
+									<th>Email</th>
+									<th>Titre du Post</th>
+									<th>CV</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for candidature in candidatures %}
+								<tr>
+									<td>{{ candidature.name }}</td>
+									<td>{{ candidature.firstname }}</td>
+									<td>{{ candidature.date_add }}</td>
+									<td>{{ candidature.email }}</td>
+									<td>{{ candidature.nom_poste.titre }}</td>
+									<td>
+                                        {% if candidature.file_cv %}
+                                            <a href="{{ candidature.file_cv.url }}" class="btn btn-primary">Télécharger le CV</a>
+                                        {% else %}
+                                            <span class="text-danger">Aucun CV transmis</span>
+                                        {% endif %}
+                                    </td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock content %}
