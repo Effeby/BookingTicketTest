@@ -81,7 +81,7 @@ def reservation(request, film_id):
                     return redirect('felicitation')
                 else:
                     # Affiche un message d'erreur
-                    error_message = "Désolé, il n'y a pas suffisamment de places disponibles."
+                    error_message = "SOLD OUT. Désolé, il n'y a pas suffisamment de places disponibles."
             else:
                 # Affiche un message d'erreur
                 error_message = "Votre solde est insuffisant. Veuillez recharger votre compte."
