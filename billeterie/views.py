@@ -22,7 +22,8 @@ def about(request):
     }
     return render(request, 'about.html', datas)
 
-from datetime import date movies(request):
+
+def movies(request):
     today = date.today()
     films = film.objects.filter(date_sortie__gte=today)
     datas = {'films': films}
