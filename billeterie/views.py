@@ -5,6 +5,7 @@ from billeterie.formContact import ContactForm
 from django.core.mail import send_mail
 from .models import Reservation_film, film
 
+from datetime import date
 
 # Create your views here.
 
@@ -21,13 +22,12 @@ def about(request):
     }
     return render(request, 'about.html', datas)
 
-
-def movies(request):
-    films = film.objects.all()
-    datas={
-        'films': films
-    }
+from datetime import date movies(request):
+    today = date.today()
+    films = film.objects.filter(date_sortie__gte=today)
+    datas = {'films': films}
     return render(request, 'movie-grid.html', datas)
+
 
 
 def movies_detail(request, film_id):
