@@ -1,4 +1,4 @@
-BookingTicketTest est un projet django qui permet de réserver des ticket de film.
+BookingTicket est un projet django qui permet de réserver des ticket de film.
 vous pouvez consulter tous les films disponibles et en choisir un pour la réservation. une fois choisi vous pouvez consulter les détails du film Côme le réalisateur, la langue, la durée, l'heure de début de la séance, le lieu de la séance...
 
 Ce projet comporte deux applications majeur:
